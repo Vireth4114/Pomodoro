@@ -1,0 +1,19 @@
+body {
+    background-color: red;
+    color: white;
+    font-size: 3em;
+}
+
+main {
+    text-align: center;
+}
+
+#timerCircle {
+    display: flex;
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    border: solid white 5px;
+    background-color: brown;
+}
