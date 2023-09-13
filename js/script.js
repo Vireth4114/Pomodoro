@@ -1,8 +1,14 @@
-let minutes = 0;
-let seconds = 3;
+let minutes = 25;
+let seconds = 0;
 
-document.getElementById("minutes").innerHTML = minutes
-document.getElementById("seconds").innerHTML = seconds
+function displayTime(time) {
+    let timeString = time.toString();
+    let formattedString = time < 10 ? "0" + timeString : timeString;
+    return formattedString;
+}
+
+document.getElementById("minutes").innerHTML = displayTime(minutes);
+document.getElementById("seconds").innerHTML = displayTime(seconds);
 
 function timerRunning() {
     seconds--;
@@ -10,11 +16,22 @@ function timerRunning() {
         minutes--;
         seconds = 59;
     }
-    document.getElementById("minutes").innerHTML = minutes
-    document.getElementById("seconds").innerHTML = seconds
+    document.getElementById("minutes").innerHTML = displayTime(minutes)
+    document.getElementById("seconds").innerHTML = displayTime(seconds)
     if (minutes == 0 && seconds == 0) {
         document.getElementById("timerCircle").innerHTML = "<i class='fa-solid fa-clock fa-shake'></i>";
     }
 }
 
-setInterval(timerRunning, 1000)
+startButton = document.getElementById("start");
+resetButton = document.getElementById("reset");
+
+startButton.onclick = function() {
+    setInterval(timerRunning, 1000);resetButton.style.display = "none";
+    resetButton.style.display = "initial";
+    startButton.replaceWith(resetButton);
+};
+
+resetButton.onclick = function() {
+    location.reload();
+}

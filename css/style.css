@@ -1,19 +1,53 @@
 body {
-    background-color: red;
+    background-color: #183048;
     color: white;
     font-size: 3em;
+    font-family: 'Roboto'
 }
 
 main {
     text-align: center;
 }
 
+h3 {
+    margin: 20px;
+}
+
 #timerCircle {
-    display: flex;
+    background-color: darkslategray;
+    border: solid white 5px;
+    border-radius: 100%;
     margin: auto;
     width: 200px;
     height: 200px;
-    border-radius: 100%;
-    border: solid white 5px;
-    background-color: brown;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    width: 150px;
+    height: 50px;
+    color: inherit;
+    border: solid white 2px;
+    margin-top: 30px;
+    border-radius: 20px;
+    font-size: 0.5em;
+}
+
+#start {
+    background-color: #282;
+}
+
+#reset {
+    background-color: red;
+    display: none;
+}
+
+#start:hover {
+    background-color: #161;
+}
+
+#reset:hover {
+    background-color: #a00;
 }
