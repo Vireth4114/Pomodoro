@@ -29,7 +29,7 @@ button {
     width: 150px;
     height: 50px;
     color: inherit;
-    border: solid white 2px;
+    border: solid white 3px;
     margin-top: 30px;
     border-radius: 20px;
     font-size: 0.5em;
@@ -56,4 +56,31 @@ button {
 #colon {
     position: relative;
     bottom: 4px;
+}
+
+#modeContainer {
+    width: 200px;
+    border: solid white 3px;
+    border-radius: 23px;
+    margin: auto;
+    font-size: 0.5em;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#modeContainer > div {
+    padding: 10px;
+    width: 100px;
+    background-color: #102030;
+    color: #606060;
+}
+
+#work {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#pause {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
