@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Usage of FontAwesome and Google Fonts to have icons and font compatibility-->
         <script src="https://kit.fontawesome.com/1e18d7f77b.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css2?family=Rowdies&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./css/style.css" />
@@ -13,8 +14,8 @@
             <h3>Pomodoro</h3>
 
             <div id="modeContainer">
-                <div id="work">Work</div>
-                <div id="pause">Pause</div>
+                <div id="work"><i class="fa-solid fa-briefcase"></i> Work</div>
+                <div id="break">Break <i class="fa-solid fa-face-laugh-beam"></i></div>
             </div>
 
             <div id="timerCircle">
@@ -24,6 +25,7 @@
             </div>
 
             <button id="start">Start</button>
+            <!--The reset button is not shown but is there-->
             <button id="reset">Reset</button>
         </main>
         <script src="./js/script.js"></script>

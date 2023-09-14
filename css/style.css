@@ -1,7 +1,15 @@
+/* I may have overused a bit the vh unity to zoom-lock the
+   website while making it responsive to the screen size */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: #183048;
     color: white;
-    font-size: 3em;
+    font-size: 6vh;
     font-family: 'Rowdies';
 }
 
@@ -10,34 +18,74 @@ main {
 }
 
 h3 {
-    margin: 20px;
+    margin: 5vh;
+}
+
+#modeContainer {
+    display: flex;
+    width: 35vh;
+    font-size: 0.5em;
+    border: solid white 0.7vh;
+    border-radius: 100vh;
+    margin: auto;
+    margin-bottom: 5vh;
+}
+
+#modeContainer > div {
+    flex: 1;
+    background-color: #102030;
+    color: #606060;
+    padding: 1.5vh;
+}
+
+#work {
+    border-top-left-radius: 100vh;
+    border-bottom-left-radius: 100vh;
+}
+
+#break {
+    border-top-right-radius: 100vh;
+    border-bottom-right-radius: 100vh;
+}
+
+i {
+    margin: 0.7vh;
 }
 
 #timerCircle {
-    background-color: darkslategray;
-    border: solid white 5px;
-    border-radius: 100%;
-    margin: auto;
-    width: 200px;
-    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 40vh;
+    aspect-ratio: 1/1;
+    background-color: darkslategray;
+    border: solid white 0.7vh;
+    border-radius: 100%;
+    margin: auto;
+}
+
+#colon {
+    position: relative;
+    bottom: 2%;
 }
 
 button {
-    width: 150px;
-    height: 50px;
-    color: inherit;
-    border: solid white 3px;
-    margin-top: 30px;
-    border-radius: 20px;
-    font-size: 0.5em;
     font-family: inherit;
+    font-size: 0.5em;
+    width: 25vh;
+    aspect-ratio: 3/1;
+    color: inherit;
+    border: solid white 0.7vh;
+    border-radius: 3vh;
+    margin-top: 5vh;
 }
 
 #start {
     background-color: #282;
+}
+
+#start:hover {
+    background-color: #161;
 }
 
 #reset {
@@ -45,42 +93,6 @@ button {
     display: none;
 }
 
-#start:hover {
-    background-color: #161;
-}
-
 #reset:hover {
     background-color: #a00;
-}
-
-#colon {
-    position: relative;
-    bottom: 4px;
-}
-
-#modeContainer {
-    width: 200px;
-    border: solid white 3px;
-    border-radius: 23px;
-    margin: auto;
-    font-size: 0.5em;
-    display: flex;
-    margin-bottom: 20px;
-}
-
-#modeContainer > div {
-    padding: 10px;
-    width: 100px;
-    background-color: #102030;
-    color: #606060;
-}
-
-#work {
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
-
-#pause {
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
 }
