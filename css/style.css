@@ -2,7 +2,7 @@ body {
     background-color: #183048;
     color: white;
     font-size: 3em;
-    font-family: 'Roboto'
+    font-family: 'Rowdies';
 }
 
 main {
@@ -33,6 +33,7 @@ button {
     margin-top: 30px;
     border-radius: 20px;
     font-size: 0.5em;
+    font-family: inherit;
 }
 
 #start {
@@ -40,7 +41,7 @@ button {
 }
 
 #reset {
-    background-color: red;
+    background-color: #f00;
     display: none;
 }
 
@@ -50,4 +51,9 @@ button {
 
 #reset:hover {
     background-color: #a00;
+}
+
+#colon {
+    position: relative;
+    bottom: 4px;
 }

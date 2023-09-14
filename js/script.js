@@ -1,6 +1,8 @@
 let minutes = 25;
 let seconds = 0;
 
+let timerSetInterval;
+
 function displayTime(time) {
     let timeString = time.toString();
     let formattedString = time < 10 ? "0" + timeString : timeString;
@@ -27,11 +29,16 @@ startButton = document.getElementById("start");
 resetButton = document.getElementById("reset");
 
 startButton.onclick = function() {
-    setInterval(timerRunning, 1000);resetButton.style.display = "none";
+    timerSetInterval = setInterval(timerRunning, 1000);resetButton.style.display = "none";
     resetButton.style.display = "initial";
     startButton.replaceWith(resetButton);
 };
 
 resetButton.onclick = function() {
-    location.reload();
+    minutes = 25;
+    seconds = 0;
+    document.getElementById("minutes").innerHTML = displayTime(minutes);
+    document.getElementById("seconds").innerHTML = displayTime(seconds);
+    resetButton.replaceWith(startButton);
+    clearInterval(timerSetInterval);
 }
