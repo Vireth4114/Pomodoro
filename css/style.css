@@ -72,11 +72,14 @@ i {
 button {
     font-family: inherit;
     font-size: 0.5em;
-    width: 25vh;
-    aspect-ratio: 3/1;
     color: inherit;
     border: solid white 0.7vh;
     border-radius: 3vh;
+}
+
+.timerButton {
+    width: 25vh;
+    aspect-ratio: 3/1;
     margin-top: 5vh;
 }
 
@@ -95,4 +98,76 @@ button {
 
 #reset:hover {
     background-color: #a00;
+}
+
+.roundButton {
+    position: absolute;
+    background-color: #102030;
+    width: 12vw;
+    max-width: 10vh;
+    font-size: min(3.5vw, 3vh);
+    aspect-ratio: 1/1;
+    border-radius: min(5vw, 3.5vh);
+    right: 5vw;
+    top: 5vw;
+}
+
+.roundButton:hover {
+    background-color: #081018;
+}
+
+#settingsContainer {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 90%;
+    z-index: 100;
+    background-color: #183048;
+    width: 40%;
+    padding-top: 10vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    font-size: min(5vw, 5vh);
+    text-align: left;
+}
+
+#durationContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 2vh;
+}
+
+#durationContainer > p {
+    text-align: right;
+    margin-right: 1.5vw;
+}
+
+.timeInput {
+    display: flex;
+    gap: 0.3vw;
+}
+
+.timeInput > input {
+    color: white;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: center;
+    width: 8vw;
+    max-width: 15vh;
+    background-color: #081018;
+    border: solid white 0.5vh;
+    border-radius: 1vh;
+}
+
+#opacityDiv {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 80%;
 }
