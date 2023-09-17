@@ -110,8 +110,7 @@ button {
 .roundButton {
     position: absolute;
     background-color: var(--el-color);
-    width: 12vw;
-    max-width: 10vh;
+    width: min(12vw, 10vh);
     font-size: min(3.5vw, 3vh);
     aspect-ratio: 1/1;
     border-radius: min(5vw, 3.5vh);
@@ -128,24 +127,33 @@ button {
     position: absolute;
     right: 0;
     top: 0;
-    height: 90%;
+    height: 100%;
     z-index: 100;
     background-color: var(--bg-color);
     width: 40%;
-    padding-top: 10vh;
     padding-left: 5vw;
     padding-right: 5vw;
     font-size: min(5vw, 5vh);
-    text-align: left;
+    text-align: center;
+}
+
+h2 {
+    margin-top: calc(min(12vw, 10vh) * 1.8);
+    margin-bottom: 3vh;
 }
 
 #durationContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    row-gap: 2vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5vh;
 }
 
-#durationContainer > p {
+#durationContainer > div {
+    display: flex;
+}
+
+#durationContainer > div > p {
     text-align: right;
     margin-right: 1.5vw;
 }
@@ -180,19 +188,22 @@ button {
 }
 
 #labelMute {
-    margin-top: 7vh;
+    margin-top: 5vh;
     display: flex;
-    gap: 1vw;
+    gap: 3vw;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 #fakeCheck {
-    width: 3vw;
+    height: max(3.2vh, 3vw);
     aspect-ratio: 1/1;
     background: var(--el-color);
     border: solid white 0.5vh;
     border-radius: 1vh;
     text-align: center;
-    font-size: 0.8em;
+    font-size: calc(max(3.2vh, 3vw)*0.75);
 }
 
 #muteCheck {
