@@ -28,17 +28,22 @@
                 <div id="durationContainer">
                     <p>Work: </p>
                     <div class="timeInput">
-                        <input id="workMinutes" type="text" value="25">
+                        <input class="nonTimer" id="workMinutes" type="text" value="25">
                         <p>:</p>
-                        <input id="workSeconds" type="text" value="00">
+                        <input class="nonTimer" id="workSeconds" type="text" value="00">
                     </div>
                     <p>Break: </p>
                     <div class="timeInput">
-                        <input id="breakMinutes" type="text" value="05">
+                        <input class="nonTimer" id="breakMinutes" type="text" value="05">
                         <p>:</p>
-                        <input id="breakSeconds" type="text" value="00">
+                        <input class="nonTimer" id="breakSeconds" type="text" value="00">
                     </div>
                 </div>
+
+                <label id="labelMute">Beeping on 00:00 :
+                    <input id="muteCheck" type="checkbox" checked>
+                    <div id="fakeCheck"><i class="fa-solid fa-check"></i></div>
+                </label>
             </div>
 
             <div id="modeContainer">

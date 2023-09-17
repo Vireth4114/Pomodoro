@@ -7,6 +7,7 @@ let minutes = 25;
 let seconds = 0;
 let timerSetInterval;
 let isBreak = false;
+let hasSound = true;
 
 const minutesElement = document.getElementById("minutes");
 const secondsElement = document.getElementById("seconds");
@@ -20,6 +21,8 @@ const wmInput = document.getElementById("workMinutes");
 const wsInput = document.getElementById("workSeconds");
 const bmInput = document.getElementById("breakMinutes");
 const bsInput = document.getElementById("breakSeconds");
+const muteCheck = document.getElementById("muteCheck");
+const beep = new Audio("./beep.mp3");
 
 //Update the Work/Break display
 function updateMode() {
@@ -50,9 +53,13 @@ function displayTime(time) {
 function updateTimer() {
     minutesElement.innerHTML = displayTime(minutes);
     secondsElement.innerHTML = displayTime(seconds);
+    document.title = (isBreak ? "Break | " : "Work | ") + displayTime(minutes) + ":" + displayTime(seconds);
 }
 
 function switchMode() {
+    if (hasSound) {
+        beep.play();
+    }
     minutes = isBreak ? workMinutes : breakMinutes;
     seconds = isBreak ? workSeconds : breakSeconds;
     updateTimer();
@@ -75,6 +82,7 @@ function timerRunning() {
     if (minutes == 0 && seconds == 0) {
         switchMode();
     }
+
 }
 
 updateTimer();
@@ -88,7 +96,7 @@ function startTimer() {
     startButton.replaceWith(resetButton);
     isBreak = false;
     updateMode();
-    [].forEach.call(document.getElementsByTagName("input"), function(el) {
+    [].forEach.call(document.getElementsByClassName("nonTimer"), function(el) {
         el.disabled = true;
         el.style.color = "var(--unfocused-color)";
     });
@@ -154,4 +162,8 @@ bsInput.oninput = function() {
     bsInput.value = (/^[0-9]*$/.test(bsInput.value)) ? displayTime(bsInput.value) : displayTime(breakSeconds);
     breakSeconds = (bsInput.value != 0) ? parseInt(bsInput.value, 10) : 0;
     updateTimer();
+}
+
+muteCheck.onchange = function() {
+    hasSound = !hasSound;
 }

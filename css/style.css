@@ -178,3 +178,36 @@ button {
     background-color: black;
     opacity: 80%;
 }
+
+#labelMute {
+    margin-top: 7vh;
+    display: flex;
+    gap: 1vw;
+}
+
+#fakeCheck {
+    width: 3vw;
+    aspect-ratio: 1/1;
+    background: var(--el-color);
+    border: solid white 0.5vh;
+    border-radius: 1vh;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+#muteCheck {
+    display: none;
+}
+
+#labelMute:hover > #fakeCheck {
+    background-color: var(--hover-el-color);
+}
+
+#fakeCheck > i {
+    display: none;
+}
+
+#muteCheck:checked ~ #fakeCheck > i {
+    display: initial;
+}
+
