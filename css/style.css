@@ -1,13 +1,20 @@
 /* I may have overused a bit the vh unity to zoom-lock the
    website while making it responsive to the screen size */
 
+:root {
+    --bg-color: #183048;
+    --el-color: #102030;
+    --hover-el-color: #081018;
+    --unfocused-color: #606060;
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 
 body {
-    background-color: #183048;
+    background-color: var(--bg-color);
     color: white;
     font-size: 6vh;
     font-family: 'Rowdies';
@@ -33,8 +40,8 @@ h3 {
 
 #modeContainer > div {
     flex: 1;
-    background-color: #102030;
-    color: #606060;
+    background-color: var(--el-color);
+    color: var(--unfocused-color);
     padding: 1.5vh;
 }
 
@@ -102,7 +109,7 @@ button {
 
 .roundButton {
     position: absolute;
-    background-color: #102030;
+    background-color: var(--el-color);
     width: 12vw;
     max-width: 10vh;
     font-size: min(3.5vw, 3vh);
@@ -113,7 +120,7 @@ button {
 }
 
 .roundButton:hover {
-    background-color: #081018;
+    background-color: var(--hover-el-color);
 }
 
 #settingsContainer {
@@ -123,7 +130,7 @@ button {
     top: 0;
     height: 90%;
     z-index: 100;
-    background-color: #183048;
+    background-color: var(--bg-color);
     width: 40%;
     padding-top: 10vh;
     padding-left: 5vw;
@@ -155,7 +162,7 @@ button {
     text-align: center;
     width: 8vw;
     max-width: 15vh;
-    background-color: #081018;
+    background-color: var(--hover-el-color);
     border: solid white 0.5vh;
     border-radius: 1vh;
 }

@@ -8,31 +8,31 @@ let seconds = 0;
 let timerSetInterval;
 let isBreak = false;
 
-let minutesElement = document.getElementById("minutes");
-let secondsElement = document.getElementById("seconds");
-let workElement = document.getElementById("work");
-let breakElement = document.getElementById("break");
-let startButton = document.getElementById("start");
-let resetButton = document.getElementById("reset");
-let settingsButton = document.getElementById("settings");
-let closeButton = document.getElementById("close");
-let wmInput = document.getElementById("workMinutes");
-let wsInput = document.getElementById("workSeconds");
-let bmInput = document.getElementById("breakMinutes");
-let bsInput = document.getElementById("breakSeconds");
+const minutesElement = document.getElementById("minutes");
+const secondsElement = document.getElementById("seconds");
+const workElement = document.getElementById("work");
+const breakElement = document.getElementById("break");
+const startButton = document.getElementById("start");
+const resetButton = document.getElementById("reset");
+const settingsButton = document.getElementById("settings");
+const closeButton = document.getElementById("close");
+const wmInput = document.getElementById("workMinutes");
+const wsInput = document.getElementById("workSeconds");
+const bmInput = document.getElementById("breakMinutes");
+const bsInput = document.getElementById("breakSeconds");
 
 //Update the Work/Break display
 function updateMode() {
     if (isBreak) {
-        workElement.style.background = "#102030";
-        breakElement.style.background = "#081018";
-        workElement.style.color = "#606060";
+        workElement.style.background = "var(--el-color)";
+        breakElement.style.background = "var(--hover-el-color)";
+        workElement.style.color = "var(--unfocused-color)";
         breakElement.style.color = "white";
     } else {
-        workElement.style.background = "#081018";
-        breakElement.style.background = "#102030";
+        workElement.style.background = "var(--hover-el-color)";
+        breakElement.style.background = "var(--el-color)";
         workElement.style.color = "white";
-        breakElement.style.color = "#606060";
+        breakElement.style.color = "var(--unfocused-color)";
     }
 }
 
@@ -90,7 +90,7 @@ function startTimer() {
     updateMode();
     [].forEach.call(document.getElementsByTagName("input"), function(el) {
         el.disabled = true;
-        el.style.color = "#606060";
+        el.style.color = "var(--unfocused-color)";
     });
     if (minutes == 0 && seconds == 0) {
         switchMode();
@@ -104,10 +104,10 @@ function stopTimer() {
     updateTimer();
     resetButton.replaceWith(startButton);
     clearInterval(timerSetInterval);
-    workElement.style.background = "#102030";
-    breakElement.style.background = "#102030";
-    workElement.style.color = "#606060";
-    breakElement.style.color = "#606060";
+    workElement.style.background = "var(--el-color)";
+    breakElement.style.background = "var(--el-color)";
+    workElement.style.color = "var(--unfocused-color)";
+    breakElement.style.color = "var(--unfocused-color)";
     [].forEach.call(document.getElementsByTagName("input"), function(el) {
         el.disabled = false;
         el.style.color = "white";
@@ -125,7 +125,7 @@ closeButton.onclick = function() {
 }
 
 wmInput.oninput = function() {
-    wmInput.value = displayTime(wmInput.value);
+    wmInput.value = (/^[0-9]*$/.test(wmInput.value)) ? displayTime(wmInput.value) : displayTime(workMinutes);
     workMinutes = (wmInput.value != 0) ? parseInt(wmInput.value, 10) : 0;
     minutes = workMinutes;
     updateTimer();
@@ -135,14 +135,14 @@ wsInput.oninput = function() {
     if (wsInput.value > 59) {
         wsInput.value = 59;
     }
-    wsInput.value = displayTime(wsInput.value);
+    wsInput.value = (/^[0-9]*$/.test(wsInput.value)) ? displayTime(wsInput.value) : displayTime(workSeconds);
     workSeconds = (wsInput.value != 0) ? parseInt(wsInput.value, 10) : 0;
     seconds = workSeconds;
     updateTimer();
 }
 
 bmInput.oninput = function() {
-    bmInput.value = displayTime(bmInput.value);
+    bmInput.value = (/^[0-9]*$/.test(bmInput.value)) ? displayTime(bmInput.value) : displayTime(breakMinutes);
     breakMinutes = (bmInput.value != 0) ? parseInt(bmInput.value, 10) : 0;
     updateTimer();
 }
@@ -151,7 +151,7 @@ bsInput.oninput = function() {
     if (bsInput.value > 59) {
         bsInput.value = 59;
     }
-    bsInput.value = displayTime(bsInput.value);
+    bsInput.value = (/^[0-9]*$/.test(bsInput.value)) ? displayTime(bsInput.value) : displayTime(breakSeconds);
     breakSeconds = (bsInput.value != 0) ? parseInt(bsInput.value, 10) : 0;
     updateTimer();
 }
