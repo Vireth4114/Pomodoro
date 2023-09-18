@@ -6,6 +6,7 @@
     --el-color: #102030;
     --hover-el-color: #081018;
     --unfocused-color: #606060;
+    --angle: 360deg; /* Redefined later for nice browsers (not Firefox) */
 }
 
 * {
@@ -78,7 +79,21 @@ i {
     aspect-ratio: 1/1;
     border-radius: 100%;
     z-index: -1;
+    background: conic-gradient(white var(--angle), var(--el-color) 0);
 }
+
+@keyframes animate {
+	to {
+		--angle: 0deg;
+	}
+}
+
+@property --angle {
+	syntax: "<angle>";
+	initial-value: 360deg;
+	inherits: false;
+}
+
 
 /* The colon is a bit higher for beauty reasons */
 #colon {
@@ -239,4 +254,13 @@ h2 {
 
 #muteCheck:checked ~ #fakeCheck > i {
     display: initial;
+}
+
+footer {
+    font-size: 0.5em;
+    text-align: center;
+    position: absolute;
+    bottom: 5vh;
+    left: 0;
+    right: 0;
 }

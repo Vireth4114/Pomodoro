@@ -5,6 +5,8 @@ let breakMinutes = (localStorage.getItem("breakMinutes") === null) ? 5 : parseIn
 let breakSeconds = (localStorage.getItem("breakSeconds") === null) ? 0 : parseInt(localStorage.getItem("breakSeconds"));
 let minutes = workMinutes;
 let seconds = workSeconds;
+let workTime;
+let breakTime;
 let timerSetInterval;
 let isBreak = false;
 let hasSound = true;
@@ -63,13 +65,6 @@ function updateTimer() {
     MINUTES_ELEM.innerHTML = displayTime(minutes);
     SECONDS_ELEM.innerHTML = displayTime(seconds);
     document.title = "Pomodoro | " + displayTime(minutes) + ":" + displayTime(seconds) + (isBreak ? " | Break" : " | Work");
-
-    let currentTime = seconds + minutes*60;
-    let totalTime = workSeconds + workMinutes*60;
-    if (isBreak) {
-        totalTime = breakSeconds + breakMinutes*60;
-    }
-    TIMER_CIRCLE.style.background = "conic-gradient(white " + (currentTime/totalTime*100) + "%, gray 0)";
 }
 
 //Change from Work to Break and the other way around
@@ -85,6 +80,9 @@ function switchMode() {
     if (minutes == 0 && seconds == 0) {
         switchMode();
     }
+    TIMER_CIRCLE.style.animation = "none";
+    TIMER_CIRCLE.offsetHeight;
+    TIMER_CIRCLE.style.animation = (isBreak ? breakTime : workTime) + "s animate linear";
 }
 
 //Ran every second, decrements the timer and switch the mode accordingly
@@ -105,6 +103,9 @@ function timerRunning() {
 //Start the timer and replace the start button with the reset one
 function startTimer() {
     timerSetInterval = setInterval(timerRunning, 1000);
+    workTime = workMinutes * 60 + workSeconds;
+    breakTime = breakMinutes * 60 + breakSeconds;
+    TIMER_CIRCLE.style.animation = (isBreak ? breakTime : workTime) + "s animate linear";
     RESET_BUTTON.style.display = "none";
     RESET_BUTTON.style.display = "initial";
     START_BUTTON.replaceWith(RESET_BUTTON);
@@ -127,6 +128,7 @@ function stopTimer() {
     updateTimer();
     RESET_BUTTON.replaceWith(START_BUTTON);
     clearInterval(timerSetInterval);
+    TIMER_CIRCLE.style.removeProperty("animation");
     WORK_ELEM.style.background = "var(--el-color)";
     BREAK_ELEM.style.background = "var(--el-color)";
     WORK_ELEM.style.color = "var(--unfocused-color)";
