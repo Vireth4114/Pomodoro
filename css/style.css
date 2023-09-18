@@ -1,4 +1,4 @@
-/* I may have overused a bit the vh unity to zoom-lock the
+/* I may have overused a bit the vw/vh unities to zoom-lock the
    website while making it responsive to the screen size */
 
 :root {
@@ -59,18 +59,28 @@ i {
     margin: 0.7vh;
 }
 
-#timerCircle {
+#timerContainer {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 40vh;
     aspect-ratio: 1/1;
     background-color: darkslategray;
-    border: solid white 0.7vh;
     border-radius: 100%;
+    position: relative;
     margin: auto;
 }
 
+/* Timer animation, behind the main container decreasing with JS */
+#timerCircle {
+    position: absolute;
+    width: 41.4vh;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    z-index: -1;
+}
+
+/* The colon is a bit higher for beauty reasons */
 #colon {
     position: relative;
     bottom: 2%;
@@ -142,6 +152,9 @@ h2 {
     margin-bottom: 3vh;
 }
 
+
+/* Timer fields styling */
+
 #durationContainer {
     display: flex;
     flex-wrap: wrap;
@@ -175,6 +188,9 @@ h2 {
     border-radius: 1vh;
 }
 
+
+/* Used to separate settings from the rest */
+
 #opacityDiv {
     display: none;
     position: absolute;
@@ -186,6 +202,9 @@ h2 {
     background-color: black;
     opacity: 80%;
 }
+
+
+/* Making a Custom Checkbox */
 
 #labelMute {
     margin-top: 5vh;
@@ -221,4 +240,3 @@ h2 {
 #muteCheck:checked ~ #fakeCheck > i {
     display: initial;
 }
-

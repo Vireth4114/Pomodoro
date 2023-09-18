@@ -6,24 +6,25 @@
         <!--Usage of FontAwesome and Google Fonts to have icons and font compatibility-->
         <script src="https://kit.fontawesome.com/1e18d7f77b.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css2?family=Rowdies&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./css/style.css" />
+        <link rel="stylesheet" href="./css/style.css">
         <title>Pomodoro</title>
     </head>
     <body>
         <main>
-            <div id="testGrid">
-                <h3>Pomodoro</h3>
+            <h3>Pomodoro</h3>
 
-                <button class="roundButton" id="settings">
-                    <i class="fa-xl fa-solid fa-gear"></i>
-                </button>
-            </div>
+            <button class="roundButton" id="settings">
+                <i class="fa-xl fa-solid fa-gear"></i>
+            </button>
+
             <!--This element serves whe you open settings to darken the screen-->
             <div id="opacityDiv"></div>
+            
             <div id="settingsContainer">
                 <button class="roundButton" id="close">
                     <i class="fa-2xl fa-solid fa-close"></i>
                 </button>
+                <!-- Change durations of timers -->
                 <h2>Duration</h2>
                 <div id="durationContainer">
                     <div>
@@ -44,18 +45,22 @@
                     </div>
                 </div>
 
+                <!-- Hability to mute the site -->
                 <label id="labelMute">Beeping on 00:00
                     <input id="muteCheck" type="checkbox" checked>
-                    <div id="fakeCheck"><i class="fa-solid fa-check"></i></div>
+                    <span id="fakeCheck"><i class="fa-solid fa-check"></i></span>
                 </label>
             </div>
 
+            <!-- Mode Display -->
             <div id="modeContainer">
                 <div id="work"><i class="fa-solid fa-briefcase"></i> Work</div>
                 <div id="break">Break <i class="fa-solid fa-face-laugh-beam"></i></div>
             </div>
 
-            <div id="timerCircle">
+            <!-- Main timer -->
+            <div id="timerContainer">
+                <div id="timerCircle"></div>
                 <p id="minutes"></p>
                 <p id="colon">:</p>
                 <p id="seconds"></p>

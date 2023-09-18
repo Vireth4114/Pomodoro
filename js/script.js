@@ -1,9 +1,8 @@
-//Variable Declaration
+//Variable Declaration, with local storage for editable fields
 let workMinutes = (localStorage.getItem("workMinutes") === null) ? 25 : parseInt(localStorage.getItem("workMinutes"));
 let workSeconds = (localStorage.getItem("workSeconds") === null) ? 0 : parseInt(localStorage.getItem("workSeconds"));
 let breakMinutes = (localStorage.getItem("breakMinutes") === null) ? 5 : parseInt(localStorage.getItem("breakMinutes"));
 let breakSeconds = (localStorage.getItem("breakSeconds") === null) ? 0 : parseInt(localStorage.getItem("breakSeconds"));
-console.log(breakMinutes);
 let minutes = workMinutes;
 let seconds = workSeconds;
 let timerSetInterval;
@@ -13,38 +12,39 @@ if (localStorage.getItem("mute") != null) {
     hasSound = (localStorage.getItem("mute") == "0") ? false : true;
 }
 
-const minutesElement = document.getElementById("minutes");
-const secondsElement = document.getElementById("seconds");
-const workElement = document.getElementById("work");
-const breakElement = document.getElementById("break");
-const startButton = document.getElementById("start");
-const resetButton = document.getElementById("reset");
-const settingsButton = document.getElementById("settings");
-const closeButton = document.getElementById("close");
-const wmInput = document.getElementById("workMinutes");
-const wsInput = document.getElementById("workSeconds");
-const bmInput = document.getElementById("breakMinutes");
-const bsInput = document.getElementById("breakSeconds");
-const muteCheck = document.getElementById("muteCheck");
-const beep = new Audio("./beep.mp3");
+const MINUTES_ELEM = document.getElementById("minutes");
+const SECONDS_ELEM = document.getElementById("seconds");
+const WORK_ELEM = document.getElementById("work");
+const BREAK_ELEM = document.getElementById("break");
+const START_BUTTON = document.getElementById("start");
+const RESET_BUTTON = document.getElementById("reset");
+const SETTINGS_BUTTON = document.getElementById("settings");
+const CLOSE_BUTTON = document.getElementById("close");
+const WORK_M_INPUT = document.getElementById("workMinutes");
+const WORK_S_INPUT = document.getElementById("workSeconds");
+const BREAK_M_INPUT = document.getElementById("breakMinutes");
+const BREAK_S_INPUT = document.getElementById("breakSeconds");
+const SOUND_BOX = document.getElementById("muteCheck");
+const TIMER_CIRCLE = document.getElementById("timerCircle");
+const BEEP_SOUND = new Audio("./beep.mp3");
 
-wmInput.value = displayTime(workMinutes);
-wsInput.value = displayTime(workSeconds);
-bmInput.value = displayTime(breakMinutes);
-bsInput.value = displayTime(breakSeconds);
+WORK_M_INPUT.value = displayTime(workMinutes);
+WORK_S_INPUT.value = displayTime(workSeconds);
+BREAK_M_INPUT.value = displayTime(breakMinutes);
+BREAK_S_INPUT.value = displayTime(breakSeconds);
 
 //Update the Work/Break display
 function updateMode() {
     if (isBreak) {
-        workElement.style.background = "var(--el-color)";
-        breakElement.style.background = "var(--hover-el-color)";
-        workElement.style.color = "var(--unfocused-color)";
-        breakElement.style.color = "white";
+        WORK_ELEM.style.background = "var(--el-color)";
+        BREAK_ELEM.style.background = "var(--hover-el-color)";
+        WORK_ELEM.style.color = "var(--unfocused-color)";
+        BREAK_ELEM.style.color = "white";
     } else {
-        workElement.style.background = "var(--hover-el-color)";
-        breakElement.style.background = "var(--el-color)";
-        workElement.style.color = "white";
-        breakElement.style.color = "var(--unfocused-color)";
+        WORK_ELEM.style.background = "var(--hover-el-color)";
+        BREAK_ELEM.style.background = "var(--el-color)";
+        WORK_ELEM.style.color = "white";
+        BREAK_ELEM.style.color = "var(--unfocused-color)";
     }
 }
 
@@ -58,16 +58,24 @@ function displayTime(time) {
     return formattedString;
 }
 
-//Display the right time
+//Display the right time and update the timer circle percentage
 function updateTimer() {
-    minutesElement.innerHTML = displayTime(minutes);
-    secondsElement.innerHTML = displayTime(seconds);
-    document.title = (isBreak ? "Break | " : "Work | ") + displayTime(minutes) + ":" + displayTime(seconds);
+    MINUTES_ELEM.innerHTML = displayTime(minutes);
+    SECONDS_ELEM.innerHTML = displayTime(seconds);
+    document.title = "Pomodoro | " + displayTime(minutes) + ":" + displayTime(seconds) + (isBreak ? " | Break" : " | Work");
+
+    let currentTime = seconds + minutes*60;
+    let totalTime = workSeconds + workMinutes*60;
+    if (isBreak) {
+        totalTime = breakSeconds + breakMinutes*60;
+    }
+    TIMER_CIRCLE.style.background = "conic-gradient(white " + (currentTime/totalTime*100) + "%, gray 0)";
 }
 
+//Change from Work to Break and the other way around
 function switchMode() {
     if (hasSound) {
-        beep.play();
+        BEEP_SOUND.play();
     }
     minutes = isBreak ? workMinutes : breakMinutes;
     seconds = isBreak ? workSeconds : breakSeconds;
@@ -94,15 +102,12 @@ function timerRunning() {
 
 }
 
-updateTimer();
-
-
 //Start the timer and replace the start button with the reset one
 function startTimer() {
     timerSetInterval = setInterval(timerRunning, 1000);
-    resetButton.style.display = "none";
-    resetButton.style.display = "initial";
-    startButton.replaceWith(resetButton);
+    RESET_BUTTON.style.display = "none";
+    RESET_BUTTON.style.display = "initial";
+    START_BUTTON.replaceWith(RESET_BUTTON);
     isBreak = false;
     updateMode();
     [].forEach.call(document.getElementsByClassName("nonTimer"), function(el) {
@@ -118,67 +123,89 @@ function startTimer() {
 function stopTimer() {
     minutes = workMinutes;
     seconds = workSeconds;
+    isBreak = false;
     updateTimer();
-    resetButton.replaceWith(startButton);
+    RESET_BUTTON.replaceWith(START_BUTTON);
     clearInterval(timerSetInterval);
-    workElement.style.background = "var(--el-color)";
-    breakElement.style.background = "var(--el-color)";
-    workElement.style.color = "var(--unfocused-color)";
-    breakElement.style.color = "var(--unfocused-color)";
+    WORK_ELEM.style.background = "var(--el-color)";
+    BREAK_ELEM.style.background = "var(--el-color)";
+    WORK_ELEM.style.color = "var(--unfocused-color)";
+    BREAK_ELEM.style.color = "var(--unfocused-color)";
     [].forEach.call(document.getElementsByClassName("nonTimer"), function(el) {
         el.disabled = false;
         el.style.color = "white";
     });
 }
 
-settingsButton.onclick = function() {
+//Settings panel implementation
+SETTINGS_BUTTON.onclick = function() {
     opacityDiv.style.display = "initial";
     settingsContainer.style.display = "initial";
 }
 
-closeButton.onclick = function() {
+CLOSE_BUTTON.onclick = function() {
     opacityDiv.style.display = "none";
-    settingsContainer.style.display = "none";
+    settingsContainer.style.display = "none";  
 }
 
-wmInput.oninput = function() {
-    wmInput.value = (/^[0-9]*$/.test(wmInput.value)) ? displayTime(wmInput.value) : displayTime(workMinutes);
-    workMinutes = (wmInput.value != 0) ? parseInt(wmInput.value, 10) : 0;
+//TIME INPUTS
+
+WORK_M_INPUT.oninput = function() {
+    WORK_M_INPUT.value = (/^[0-9]*$/.test(WORK_M_INPUT.value)) ? displayTime(WORK_M_INPUT.value) : displayTime(workMinutes);
+    workMinutes = (WORK_M_INPUT.value != 0) ? parseInt(WORK_M_INPUT.value, 10) : 0;
     minutes = workMinutes;
     localStorage.setItem("workMinutes", workMinutes.toString());
     updateTimer();
 }
 
-wsInput.oninput = function() {
-    if (wsInput.value > 59) {
-        wsInput.value = 59;
+WORK_S_INPUT.oninput = function() {
+    if (WORK_S_INPUT.value > 59) {
+        WORK_S_INPUT.value = 59;
     }
-    wsInput.value = (/^[0-9]*$/.test(wsInput.value)) ? displayTime(wsInput.value) : displayTime(workSeconds);
-    workSeconds = (wsInput.value != 0) ? parseInt(wsInput.value, 10) : 0;
+    WORK_S_INPUT.value = (/^[0-9]*$/.test(WORK_S_INPUT.value)) ? displayTime(WORK_S_INPUT.value) : displayTime(workSeconds);
+    workSeconds = (WORK_S_INPUT.value != 0) ? parseInt(WORK_S_INPUT.value, 10) : 0;
     seconds = workSeconds;
     localStorage.setItem("workSeconds", workSeconds.toString());
     updateTimer();
 }
 
-bmInput.oninput = function() {
-    bmInput.value = (/^[0-9]*$/.test(bmInput.value)) ? displayTime(bmInput.value) : displayTime(breakMinutes);
-    breakMinutes = (bmInput.value != 0) ? parseInt(bmInput.value, 10) : 0;
+BREAK_M_INPUT.oninput = function() {
+    BREAK_M_INPUT.value = (/^[0-9]*$/.test(BREAK_M_INPUT.value)) ? displayTime(BREAK_M_INPUT.value) : displayTime(breakMinutes);
+    breakMinutes = (BREAK_M_INPUT.value != 0) ? parseInt(BREAK_M_INPUT.value, 10) : 0;
     localStorage.setItem("breakMinutes", breakMinutes.toString());
     updateTimer();
 }
 
-bsInput.oninput = function() {
-    if (bsInput.value > 59) {
-        bsInput.value = 59;
+BREAK_S_INPUT.oninput = function() {
+    if (BREAK_S_INPUT.value > 59) {
+        BREAK_S_INPUT.value = 59;
     }
-    bsInput.value = (/^[0-9]*$/.test(bsInput.value)) ? displayTime(bsInput.value) : displayTime(breakSeconds);
-    breakSeconds = (bsInput.value != 0) ? parseInt(bsInput.value, 10) : 0;
+    BREAK_S_INPUT.value = (/^[0-9]*$/.test(BREAK_S_INPUT.value)) ? displayTime(BREAK_S_INPUT.value) : displayTime(breakSeconds);
+    breakSeconds = (BREAK_S_INPUT.value != 0) ? parseInt(BREAK_S_INPUT.value, 10) : 0;
     updateTimer();
     localStorage.setItem("breakSeconds", breakSeconds.toString());
 }
 
-muteCheck.onchange = function() {
+//Safecheck to prevent 00:00 time
+Array.prototype.forEach.call(document.getElementsByClassName("nonTimer"), function(el) {
+    el.onchange = function() {
+        if (WORK_M_INPUT.value == "00" && WORK_S_INPUT.value == "00") {
+            WORK_S_INPUT.value = displayTime(1);
+            workSeconds = 1;
+            seconds = 1;
+        }
+        if (BREAK_M_INPUT.value == "00" && BREAK_S_INPUT.value == "00") {
+            BREAK_S_INPUT.value = displayTime(1);
+            breakSeconds = 1;
+        }
+        updateTimer();
+    }
+});
+
+//Disable Sound
+SOUND_BOX.onchange = function() {
     hasSound = !hasSound;
     localStorage.setItem("mute", hasSound ? "1" : "0");
 }
 
+updateTimer();

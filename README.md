@@ -18,5 +18,5 @@ As a small project, it won't have too much going on, but I will try to have thos
 - A sound when the timer switch from one mode to another so that you won't forget about it (Completed)
 - The hability to change the duration of work and break time (Completed)
 - Have custom user times saved locally (Completed)
-- Have a nice timer design (I have one specific idea that may require approximately 247,000 lines of CSS/JS)
+- Have a nice timer design (Completed :D)
 - Maybe other things I haven't thought about for now
