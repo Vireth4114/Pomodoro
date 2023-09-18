@@ -1,13 +1,17 @@
 //Variable Declaration
-let workMinutes = (localStorage.getItem("workMinutes") == null) ? 25 : localStorage.getItem("workMinutes");
-let workSeconds = (localStorage.getItem("workSeconds") == null) ? 0 : localStorage.getItem("workSeconds");
-let breakMinutes = (localStorage.getItem("breakMinutes") == null) ? 5 : localStorage.getItem("breakMinutes");
-let breakSeconds = (localStorage.getItem("breakSeconds") == null) ? 0 : localStorage.getItem("breakSeconds");
+let workMinutes = (localStorage.getItem("workMinutes") === null) ? 25 : parseInt(localStorage.getItem("workMinutes"));
+let workSeconds = (localStorage.getItem("workSeconds") === null) ? 0 : parseInt(localStorage.getItem("workSeconds"));
+let breakMinutes = (localStorage.getItem("breakMinutes") === null) ? 5 : parseInt(localStorage.getItem("breakMinutes"));
+let breakSeconds = (localStorage.getItem("breakSeconds") === null) ? 0 : parseInt(localStorage.getItem("breakSeconds"));
+console.log(breakMinutes);
 let minutes = workMinutes;
 let seconds = workSeconds;
 let timerSetInterval;
 let isBreak = false;
-let hasSound = (localStorage.getItem("mute") == null) ? true : localStorage.getItem("mute");
+let hasSound = true;
+if (localStorage.getItem("mute") != null) {
+    hasSound = (localStorage.getItem("mute") == "0") ? false : true;
+}
 
 const minutesElement = document.getElementById("minutes");
 const secondsElement = document.getElementById("seconds");
@@ -23,6 +27,11 @@ const bmInput = document.getElementById("breakMinutes");
 const bsInput = document.getElementById("breakSeconds");
 const muteCheck = document.getElementById("muteCheck");
 const beep = new Audio("./beep.mp3");
+
+wmInput.value = displayTime(workMinutes);
+wsInput.value = displayTime(workSeconds);
+bmInput.value = displayTime(breakMinutes);
+bsInput.value = displayTime(breakSeconds);
 
 //Update the Work/Break display
 function updateMode() {
@@ -136,7 +145,7 @@ wmInput.oninput = function() {
     wmInput.value = (/^[0-9]*$/.test(wmInput.value)) ? displayTime(wmInput.value) : displayTime(workMinutes);
     workMinutes = (wmInput.value != 0) ? parseInt(wmInput.value, 10) : 0;
     minutes = workMinutes;
-    localStorage.setItem("workMinutes", workMinutes);
+    localStorage.setItem("workMinutes", workMinutes.toString());
     updateTimer();
 }
 
@@ -147,14 +156,14 @@ wsInput.oninput = function() {
     wsInput.value = (/^[0-9]*$/.test(wsInput.value)) ? displayTime(wsInput.value) : displayTime(workSeconds);
     workSeconds = (wsInput.value != 0) ? parseInt(wsInput.value, 10) : 0;
     seconds = workSeconds;
-    localStorage.setItem("workSeconds", workSeconds);
+    localStorage.setItem("workSeconds", workSeconds.toString());
     updateTimer();
 }
 
 bmInput.oninput = function() {
     bmInput.value = (/^[0-9]*$/.test(bmInput.value)) ? displayTime(bmInput.value) : displayTime(breakMinutes);
     breakMinutes = (bmInput.value != 0) ? parseInt(bmInput.value, 10) : 0;
-    localStorage.setItem("BreakMinutes", breakMinutes);
+    localStorage.setItem("breakMinutes", breakMinutes.toString());
     updateTimer();
 }
 
@@ -165,11 +174,11 @@ bsInput.oninput = function() {
     bsInput.value = (/^[0-9]*$/.test(bsInput.value)) ? displayTime(bsInput.value) : displayTime(breakSeconds);
     breakSeconds = (bsInput.value != 0) ? parseInt(bsInput.value, 10) : 0;
     updateTimer();
-    localStorage.setItem("breakSeconds", breakSeconds);
+    localStorage.setItem("breakSeconds", breakSeconds.toString());
 }
 
 muteCheck.onchange = function() {
     hasSound = !hasSound;
-    localStorage.setItem("mute", hasSound);
+    localStorage.setItem("mute", hasSound ? "1" : "0");
 }
 
