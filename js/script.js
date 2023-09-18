@@ -1,13 +1,13 @@
 //Variable Declaration
-let workMinutes = 25;
-let workSeconds = 0;
-let breakMinutes = 5;
-let breakSeconds = 0;
-let minutes = 25;
-let seconds = 0;
+let workMinutes = (localStorage.getItem("workMinutes") == null) ? 25 : localStorage.getItem("workMinutes");
+let workSeconds = (localStorage.getItem("workSeconds") == null) ? 0 : localStorage.getItem("workSeconds");
+let breakMinutes = (localStorage.getItem("breakMinutes") == null) ? 5 : localStorage.getItem("breakMinutes");
+let breakSeconds = (localStorage.getItem("breakSeconds") == null) ? 0 : localStorage.getItem("breakSeconds");
+let minutes = workMinutes;
+let seconds = workSeconds;
 let timerSetInterval;
 let isBreak = false;
-let hasSound = true;
+let hasSound = (localStorage.getItem("mute") == null) ? true : localStorage.getItem("mute");
 
 const minutesElement = document.getElementById("minutes");
 const secondsElement = document.getElementById("seconds");
@@ -116,7 +116,7 @@ function stopTimer() {
     breakElement.style.background = "var(--el-color)";
     workElement.style.color = "var(--unfocused-color)";
     breakElement.style.color = "var(--unfocused-color)";
-    [].forEach.call(document.getElementsByTagName("input"), function(el) {
+    [].forEach.call(document.getElementsByClassName("nonTimer"), function(el) {
         el.disabled = false;
         el.style.color = "white";
     });
@@ -136,6 +136,7 @@ wmInput.oninput = function() {
     wmInput.value = (/^[0-9]*$/.test(wmInput.value)) ? displayTime(wmInput.value) : displayTime(workMinutes);
     workMinutes = (wmInput.value != 0) ? parseInt(wmInput.value, 10) : 0;
     minutes = workMinutes;
+    localStorage.setItem("workMinutes", workMinutes);
     updateTimer();
 }
 
@@ -146,12 +147,14 @@ wsInput.oninput = function() {
     wsInput.value = (/^[0-9]*$/.test(wsInput.value)) ? displayTime(wsInput.value) : displayTime(workSeconds);
     workSeconds = (wsInput.value != 0) ? parseInt(wsInput.value, 10) : 0;
     seconds = workSeconds;
+    localStorage.setItem("workSeconds", workSeconds);
     updateTimer();
 }
 
 bmInput.oninput = function() {
     bmInput.value = (/^[0-9]*$/.test(bmInput.value)) ? displayTime(bmInput.value) : displayTime(breakMinutes);
     breakMinutes = (bmInput.value != 0) ? parseInt(bmInput.value, 10) : 0;
+    localStorage.setItem("BreakMinutes", breakMinutes);
     updateTimer();
 }
 
@@ -162,8 +165,11 @@ bsInput.oninput = function() {
     bsInput.value = (/^[0-9]*$/.test(bsInput.value)) ? displayTime(bsInput.value) : displayTime(breakSeconds);
     breakSeconds = (bsInput.value != 0) ? parseInt(bsInput.value, 10) : 0;
     updateTimer();
+    localStorage.setItem("breakSeconds", breakSeconds);
 }
 
 muteCheck.onchange = function() {
     hasSound = !hasSound;
+    localStorage.setItem("mute", hasSound);
 }
+
