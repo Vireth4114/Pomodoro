@@ -5,7 +5,7 @@
     --bg-color: #183048;
     --el-color: #102030;
     --hover-el-color: #081018;
-    --unfocused-color: #606060;
+    --unfocused-color: #888;
     --angle: 360deg; /* Redefined later for nice browsers (not Firefox) */
 }
 
@@ -25,8 +25,9 @@ main {
     text-align: center;
 }
 
-h3 {
-    margin: 5vh;
+h1 {
+    font-size: 1.4em;
+    margin: 5vh;   
 }
 
 #modeContainer {
@@ -70,6 +71,10 @@ i {
     border-radius: 100%;
     position: relative;
     margin: auto;
+}
+
+h3 {
+    font-size: 1.2em;
 }
 
 /* Timer animation, behind the main container decreasing with JS */
@@ -167,7 +172,6 @@ h2 {
     margin-bottom: 3vh;
 }
 
-
 /* Timer fields styling */
 
 #durationContainer {
@@ -181,7 +185,7 @@ h2 {
     display: flex;
 }
 
-#durationContainer > div > p {
+#durationContainer > div > label {
     text-align: right;
     margin-right: 1.5vw;
 }

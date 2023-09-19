@@ -12,9 +12,9 @@
     </head>
     <body>
         <main>
-            <h3>Pomodoro</h3>
+            <h1>Pomodoro</h1>
 
-            <button class="roundButton" id="settings">
+            <button title="settings" class="roundButton" id="settings">
                 <i class="fa-xl fa-solid fa-gear"></i>
             </button>
 
@@ -22,25 +22,25 @@
             <div id="opacityDiv"></div>
             
             <div id="settingsContainer">
-                <button class="roundButton" id="close">
+                <button title="close" class="roundButton" id="close">
                     <i class="fa-2xl fa-solid fa-close"></i>
                 </button>
                 <!-- Change durations of timers -->
                 <h2>Duration</h2>
                 <div id="durationContainer">
                     <div>
-                        <p>Work: </p>
+                        <label for="workMinutes">Work: </label>
                         <div class="timeInput">
                             <input class="nonTimer" id="workMinutes" type="text" value="25">
-                            <p>:</p>
+                            <label for="workSeconds">:</label>
                             <input class="nonTimer" id="workSeconds" type="text" value="00">
                         </div>
                     </div>
                     <div>
-                        <p>Break: </p>
+                        <label for="breakMinutes">Break: </label>
                         <div class="timeInput">
                             <input class="nonTimer" id="breakMinutes" type="text" value="05">
-                            <p>:</p>
+                            <label for="breakSeconds">:</label>
                             <input class="nonTimer" id="breakSeconds" type="text" value="00">
                         </div>
                     </div>
@@ -63,9 +63,9 @@
             <!-- Main timer -->
             <div id="timerContainer">
                 <div id="timerCircle"></div>
-                <p id="minutes"></p>
-                <p id="colon">:</p>
-                <p id="seconds"></p>
+                <h3 id="minutes"></h1>
+                <h3 id="colon">:</h1>
+                <h3 id="seconds"></h1>
             </div>
 
             <button class="timerButton" id="start" onclick="startTimer()">Start</button>
